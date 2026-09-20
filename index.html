@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Mullet Review — Concept Site</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Monoton&family=Bungee&family=Work+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lacquer:#7A1E17;
+    --lacquer-deep:#3E100E;
+    --gold:#E8B23D;
+    --gold-bright:#F6D065;
+    --jade:#2F6B4F;
+    --jade-bright:#4E9A75;
+    --ivory:#F3E9D2;
+    --char:#18100C;
+    --char-2:#241A15;
+    --line: rgba(243,233,210,0.14);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--char);
+    color:var(--ivory);
+    font-family:'Work Sans', system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    padding-inline:0;
+  }
+  img{max-width:100%;}
+  [hidden]{display:none!important;}
+  a{color:inherit;}
+  .wrap{
+    max-width:1120px;
+    margin-inline:auto;
+    padding-inline:20px;
+  }
+  h1,h2,h3{
+    font-family:'Bungee', system-ui, sans-serif;
+    line-height:1.05;
+    text-wrap:balance;
+    margin:0;
+  }
+  .mono{font-family:'Space Mono', ui-monospace, monospace;}
+
+  /* ===== marquee ticker ===== */
+  .ticker-bar{
+    background:var(--gold);
+    color:var(--char);
+    border-bottom:3px solid var(--char);
+    overflow:hidden;
+    white-space:nowrap;
+    position:relative;
+  }
+  .ticker-track{
+    display:inline-flex;
+    gap:2.5rem;
+    padding-block:8px;
+    animation: scroll-left 26s linear infinite;
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:0.8rem;
+    letter-spacing:0.04em;
+  }
+  .ticker-track span{ padding-inline:0.25rem; }
+  @keyframes scroll-left{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{ animation:none; }
+  }
+
+  /* ===== nav ===== */
+  header.site{
+    position:sticky;
+    top:env(safe-area-inset-top,0px);
+    z-index:20;
+    background:linear-gradient(180deg, var(--char) 80%, rgba(24,16,12,0));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(4px);
+  }
+  .nav-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    padding-block:14px;
+  }
+  .brand{
+    font-family:'Bungee', sans-serif;
+    font-size:1.05rem;
+    letter-spacing:0.02em;
+    display:flex;
+    align-items:center;
+    gap:0.5rem;
+    white-space:nowrap;
+  }
+  nav.links{
+    display:none;
+    gap:1.5rem;
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+  }
+  nav.links a{ text-decoration:none; opacity:0.85; }
+  nav.links a:hover{ opacity:1; color:var(--gold-bright); }
+  @media (min-width:680px){
+    nav.links{ display:flex; }
+  }
+  .badge{
+    font-family:'Space Mono', monospace;
+    font-size:0.62rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    background:var(--jade);
+    color:var(--ivory);
+    border:1px solid var(--jade-bright);
+    border-radius:999px;
+    padding:5px 10px;
+    white-space:nowrap;
+  }
+
+  /* ===== hero ===== */
+  .hero{
+    padding-block:64px 48px;
+    position:relative;
+    background:
+      radial-gradient(120% 90% at 15% -10%, rgba(122,30,23,0.55), transparent 55%),
+      radial-gradient(90% 70% at 100% 0%, rgba(47,107,79,0.35), transparent 60%);
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:0.5rem;
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    color:var(--gold-bright);
+    border:1px solid var(--line);
+    padding:6px 12px;
+    border-radius:999px;
+    margin-bottom:22px;
+  }
+  .eyebrow .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--jade-bright);
+    box-shadow:0 0 8px var(--jade-bright);
+  }
+  .neon{
+    font-family:'Monoton', cursive;
+    font-size:clamp(2.2rem, 9vw, 4.6rem);
+    color:var(--gold-bright);
+    text-shadow:
+      0 0 6px rgba(246,208,101,0.7),
+      0 0 22px rgba(232,178,61,0.45),
+      0 0 44px rgba(122,30,23,0.55);
+    line-height:1;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(1.9rem, 5.2vw, 3.4rem);
+    max-width:14ch;
+    margin-bottom:18px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--jade-bright);
+  }
+  .hero p.lede{
+    max-width:52ch;
+    font-size:1.05rem;
+    color:rgba(243,233,210,0.86);
+    margin-bottom:30px;
+  }
+  .cta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-bottom:44px;
+  }
+  .btn{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:0.85rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    text-decoration:none;
+    padding:14px 22px;
+    border-radius:8px;
+    display:inline-flex;
+    align-items:center;
+    gap:0.5rem;
+    border:2px solid transparent;
+  }
+  .btn.primary{
+    background:var(--gold);
+    color:var(--char);
+    box-shadow:0 6px 0 var(--lacquer-deep);
+  }
+  .btn.primary:hover{ transform:translateY(1px); box-shadow:0 5px 0 var(--lacquer-deep); }
+  .btn.ghost{
+    border-color:var(--line);
+    color:var(--ivory);
+  }
+  .btn.ghost:hover{ border-color:var(--gold-bright); color:var(--gold-bright); }
+
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  @media (min-width:640px){
+    .stat-grid{ grid-template-columns:repeat(4,1fr); }
+  }
+  .stat{
+    background:var(--char-2);
+    padding:18px 16px;
+  }
+  .stat .num{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:1.5rem;
+    color:var(--gold-bright);
+    font-variant-numeric:tabular-nums;
+  }
+  .stat .label{
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:rgba(243,233,210,0.65);
+    margin-top:4px;
+  }
+
+  /* ===== section shell ===== */
+  section{ padding-block:56px; border-top:1px solid var(--line); }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:1rem;
+    margin-bottom:28px;
+    flex-wrap:wrap;
+  }
+  .section-head h2{ font-size:clamp(1.4rem,3.4vw,2rem); }
+  .section-tag{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--jade-bright);
+  }
+
+  /* ===== rules ===== */
+  .rules{
+    display:grid;
+    gap:14px;
+  }
+  .rule{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:16px;
+    align-items:start;
+    padding:16px;
+    background:var(--char-2);
+    border:1px solid var(--line);
+    border-radius:10px;
+  }
+  .rule .rn{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    color:var(--lacquer);
+    background:var(--gold);
+    border-radius:6px;
+    padding:4px 8px;
+    font-size:0.85rem;
+  }
+  .rule p{ margin:0; color:rgba(243,233,210,0.88); }
+
+  /* ===== hall of fame ===== */
+  .fame{
+    display:grid;
+    gap:24px;
+    background:linear-gradient(135deg, var(--lacquer), var(--lacquer-deep));
+    border:1px solid rgba(232,178,61,0.4);
+    border-radius:16px;
+    padding:28px;
+    position:relative;
+    overflow:hidden;
+  }
+  @media (min-width:760px){
+    .fame{ grid-template-columns: auto 1fr; align-items:center; }
+  }
+  .fame .medallion{
+    width:96px;height:96px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--gold-bright), var(--gold) 55%, var(--lacquer-deep) 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Bungee', sans-serif;
+    color:var(--char);
+    font-size:1.6rem;
+    box-shadow:0 0 30px rgba(232,178,61,0.5);
+    flex-shrink:0;
+  }
+  .fame h3{ font-size:1.3rem; margin-bottom:6px; color:var(--gold-bright); }
+  .fame p{ margin:0; color:rgba(243,233,210,0.9); max-width:52ch; }
+  .fame .fine{
+    margin-top:10px;
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:rgba(243,233,210,0.7);
+  }
+
+  /* ===== merch menu board ===== */
+  .menu-board{
+    border:2px dashed var(--gold);
+    border-radius:14px;
+    padding:24px;
+    background:repeating-linear-gradient(135deg, var(--char-2), var(--char-2) 12px, rgba(232,178,61,0.03) 12px, rgba(232,178,61,0.03) 24px);
+  }
+  .notify-row{
+    margin-top:24px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .notify-row input{
+    flex:1 1 220px;
+    background:var(--char);
+    border:1px solid var(--line);
+    color:var(--ivory);
+    border-radius:8px;
+    padding:12px 14px;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.9rem;
+  }
+  .notify-row input::placeholder{ color:rgba(243,233,210,0.4); }
+  .concept-note{
+    margin-top:14px;
+    font-size:0.74rem;
+    color:rgba(243,233,210,0.5);
+    font-family:'Space Mono', monospace;
+  }
+
+  /* ===== footer ===== */
+  footer{
+    padding-block:44px calc(40px + env(safe-area-inset-bottom,0px));
+    border-top:1px solid var(--line);
+  }
+  .foot-grid{
+    display:grid;
+    gap:28px;
+  }
+  @media (min-width:680px){
+    .foot-grid{ grid-template-columns:1.3fr 1fr; }
+  }
+  .social-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:14px;
+  }
+  .social-row a{
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    text-decoration:none;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:8px 14px;
+  }
+  .social-row a:hover{ border-color:var(--gold-bright); color:var(--gold-bright); }
+  .credit{
+    font-size:0.78rem;
+    color:rgba(243,233,210,0.55);
+    line-height:1.6;
+  }
+  .credit strong{ color:var(--gold-bright); }
+  .fineprint{
+    margin-top:30px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    font-size:0.68rem;
+    color:rgba(243,233,210,0.4);
+    font-family:'Space Mono', monospace;
+  }
+
+  .mark-icon{ color:var(--gold-bright); flex-shrink:0; }
+  .hero-mark{
+    position:absolute;
+    right:-10px;
+    top:6px;
+    width:120px;
+    height:120px;
+    color:var(--lacquer);
+    opacity:0.5;
+    transform:rotate(8deg);
+    z-index:0;
+  }
+  @media (min-width:760px){
+    .hero-mark{ width:190px; height:190px; right:0; top:0; opacity:0.65; }
+  }
+  .hero-inner{ position:relative; z-index:1; }
+
+  /* ===== route map ===== */
+  .route-layout{
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+    align-items:flex-start;
+  }
+  .route-map{
+    flex:0 0 240px;
+    max-width:100%;
+    background:var(--char-2);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:16px;
+  }
+  .road-svg{ width:100%; height:auto; display:block; }
+  .road{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:3;
+    stroke-dasharray:2 10;
+    stroke-linecap:round;
+    opacity:0.5;
+  }
+  .road.tail{ opacity:0.3; }
+  .pin{ cursor:pointer; color:var(--gold); outline:none; }
+  .pin .pin-visual{
+    transition:transform .18s ease;
+    transform-box:fill-box;
+    transform-origin:center;
+  }
+  .pin:hover .pin-visual,
+  .pin:focus-visible .pin-visual,
+  .pin.active .pin-visual{ transform:scale(1.14); }
+  .pin:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:4px; border-radius:6px; }
+  .pin.active{ color:var(--jade-bright); }
+  .pin.hero-pin{ color:var(--gold-bright); }
+  .pin.hero-pin .pin-visual{ filter:drop-shadow(0 0 6px rgba(232,178,61,0.75)); }
+  .pin.hero-pin.active{ color:var(--jade-bright); }
+  .pin-label{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    font-weight:700;
+    fill:var(--ivory);
+    letter-spacing:0.04em;
+  }
+  .pin-sub{
+    font-family:'Space Mono', monospace;
+    font-size:9px;
+    fill:rgba(243,233,210,0.6);
+  }
+  .route-more{
+    font-family:'Space Mono', monospace;
+    font-size:9px;
+    fill:rgba(243,233,210,0.4);
+    letter-spacing:0.04em;
+  }
+  .route-hint{
+    margin-top:12px;
+    font-family:'Space Mono', monospace;
+    font-size:0.68rem;
+    color:rgba(243,233,210,0.45);
+    text-align:center;
+  }
+  .route-log{ flex:1 1 320px; min-width:0; }
+  .route-note{
+    font-size:0.82rem;
+    color:rgba(243,233,210,0.6);
+    max-width:60ch;
+    margin:0 0 20px;
+  }
+
+  /* ===== tour log ===== */
+  .tourlog{
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+    background:var(--char-2);
+  }
+  .tourlog-row{
+    display:grid;
+    grid-template-columns:52px 1fr auto;
+    gap:12px;
+    align-items:center;
+    padding:14px 16px;
+    border-bottom:1px solid var(--line);
+    border-left:3px solid transparent;
+    transition:opacity .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .tourlog-row:last-child{ border-bottom:none; }
+  .tourlog-row.active{ background:rgba(232,178,61,0.12); border-left-color:var(--gold); }
+  .tourlog-row.dim{ opacity:0.35; }
+  .tourlog-row.head{
+    background:rgba(232,178,61,0.08);
+    font-family:'Space Mono', monospace;
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:rgba(243,233,210,0.6);
+    padding-block:10px;
+  }
+  .tourlog-row .stop-no{ font-family:'Space Mono', monospace; color:var(--gold-bright); font-size:0.85rem; }
+  .tourlog-row .place{ font-weight:600; }
+  .tourlog-row .place small{
+    display:block;
+    font-weight:400;
+    font-size:0.78rem;
+    color:rgba(243,233,210,0.6);
+    margin-top:2px;
+  }
+  .tourlog-row .result{ display:flex; align-items:center; gap:8px; }
+  .tourlog-row .stars{ letter-spacing:0.1em; color:var(--gold); white-space:nowrap; }
+  .tourlog-row .stars .off{ color:rgba(243,233,210,0.2); }
+  .tourlog-row .tag{
+    font-family:'Space Mono', monospace;
+    font-size:0.6rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:rgba(243,233,210,0.4);
+    white-space:nowrap;
+  }
+  .tourlog-row.win{ background:rgba(47,107,79,0.14); }
+  .tourlog-row.win .place{ color:var(--jade-bright); }
+
+  /* ===== merch shop grid ===== */
+  .shop-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+  }
+  @media (min-width:680px){
+    .shop-grid{ grid-template-columns:repeat(4,1fr); }
+  }
+  .product{
+    background:var(--char-2);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px 14px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .product .art{
+    aspect-ratio:1/1;
+    border-radius:8px;
+    background:repeating-linear-gradient(135deg, rgba(232,178,61,0.06), rgba(232,178,61,0.06) 10px, transparent 10px, transparent 20px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--gold);
+  }
+  .product .art svg{ width:52%; height:52%; }
+  .product .pname{ font-weight:700; font-size:0.92rem; }
+  .product .pdesc{ font-size:0.76rem; color:rgba(243,233,210,0.6); flex:1; }
+  .product .prow{ display:flex; justify-content:space-between; align-items:center; }
+  .product .price{ font-family:'Space Mono', monospace; color:var(--gold-bright); font-size:0.8rem; }
+  .product .concept-pill{
+    font-family:'Space Mono', monospace;
+    font-size:0.58rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    background:var(--jade);
+    border:1px solid var(--jade-bright);
+    border-radius:999px;
+    padding:2px 8px;
+  }
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute;" aria-hidden="true">
+  <symbol id="mullet-icon" viewBox="0 0 64 64">
+    <circle cx="32" cy="21" r="13" fill="currentColor"/>
+    <path d="M19 27 C12 32, 8 45, 13 59 C18 50, 20 42, 22 30 Z" fill="currentColor"/>
+    <path d="M32 30 C27 39, 25 50, 30 61 C35 52, 35 42, 35 30 Z" fill="currentColor"/>
+    <path d="M45 27 C52 32, 56 45, 51 59 C46 50, 44 42, 42 30 Z" fill="currentColor"/>
+  </symbol>
+  <symbol id="tee-icon" viewBox="0 0 64 64">
+    <path d="M20 8 L8 18 L14 28 L20 24 L20 56 L44 56 L44 24 L50 28 L56 18 L44 8 C44 8 40 14 32 14 C24 14 20 8 20 8 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="cap-icon" viewBox="0 0 64 64">
+    <path d="M10 40 C10 24 20 14 32 14 C44 14 54 24 54 40 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+    <path d="M10 40 L2 42 L4 48 L12 46 Z" fill="currentColor"/>
+    <circle cx="32" cy="18" r="2.5" fill="currentColor"/>
+  </symbol>
+  <symbol id="pin-icon" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
+    <circle cx="32" cy="32" r="8" fill="currentColor"/>
+  </symbol>
+  <symbol id="sticker-icon" viewBox="0 0 64 64">
+    <rect x="8" y="8" width="30" height="30" rx="6" fill="none" stroke="currentColor" stroke-width="3"/>
+    <rect x="24" y="24" width="30" height="30" rx="6" fill="none" stroke="currentColor" stroke-width="3"/>
+  </symbol>
+  <symbol id="pin-marker" viewBox="0 0 24 32">
+    <path d="M12 0C5.4 0 0 5.4 0 12c0 9 12 20 12 20s12-11 12-20C24 5.4 18.6 0 12 0z" fill="currentColor"/>
+    <circle cx="12" cy="12" r="5" fill="var(--char-2)"/>
+  </symbol>
+</svg>
+
+<div class="ticker-bar" aria-hidden="true">
+  <div class="ticker-track">
+    <span>🥡 NOW SERVING: BUFFET #76</span>
+    <span>★ STILL NO SIGN OF DEFEAT</span>
+    <span>🧧 WE SUPPORT SMALL BUSINESS</span>
+    <span>🥢 CRAB RANGOON IS THE CONTROL VARIABLE</span>
+    <span>📬 SPECIAL DELIVERY: A NEW BUFFET EVERY WEEK</span>
+    <span>🥡 NOW SERVING: BUFFET #76</span>
+    <span>★ STILL NO SIGN OF DEFEAT</span>
+    <span>🧧 WE SUPPORT SMALL BUSINESS</span>
+    <span>🥢 CRAB RANGOON IS THE CONTROL VARIABLE</span>
+    <span>📬 SPECIAL DELIVERY: A NEW BUFFET EVERY WEEK</span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <div class="brand"><svg class="mark-icon" width="22" height="22"><use href="#mullet-icon"></use></svg> MULLET REVIEW</div>
+    <nav class="links">
+      <a href="#challenge">The Challenge</a>
+      <a href="#scoreboard">Scoreboard</a>
+      <a href="#hall-of-fame">Hall of Fame</a>
+      <a href="#merch">Merch</a>
+      <a href="#follow">Follow</a>
+    </nav>
+    <span class="badge">Concept pitch · not live</span>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap" style="border-top:none;">
+    <svg class="hero-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#mullet-icon"></use></svg>
+    <div class="hero-inner">
+      <div class="eyebrow"><span class="dot"></span> Ohio · Tennessee · Indiana buffet crawl</div>
+      <div class="neon">MULLET REVIEW</div>
+      <h1>One mullet. Every buffet. <em>Zero surrender.</em></h1>
+      <p class="lede">A mail carrier by day, a one-man steam-table gauntlet by night. The mission: eat at Chinese and Asian buffets until he lands a 5-star review — or the buffet finally wins. Ninety-something episodes in, it still hasn't happened twice.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="https://www.tiktok.com/@mulletreview69" target="_blank" rel="noopener">▶ Watch the latest review</a>
+        <a class="btn ghost" href="#merch">See the merch concept</a>
+      </div>
+      <div class="stat-grid mono">
+        <div class="stat"><div class="num">900K+</div><div class="label">TikTok followers</div></div>
+        <div class="stat"><div class="num">75+</div><div class="label">Buffets reviewed</div></div>
+        <div class="stat"><div class="num">87</div><div class="label">Days to first 5★</div></div>
+        <div class="stat"><div class="num">OH·TN·IN</div><div class="label">States crawled</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="challenge" class="wrap">
+    <div class="section-head">
+      <h2>The (unofficial) rules of the crawl</h2>
+      <span class="section-tag">as best we can tell</span>
+    </div>
+    <div class="rules">
+      <div class="rule"><span class="rn mono">01</span><p>Eat until you hit 5 stars — or the buffet wins and the streak resets.</p></div>
+      <div class="rule"><span class="rn mono">02</span><p>Every stop is a real, independently-owned buffet. Chains don't count.</p></div>
+      <div class="rule"><span class="rn mono">03</span><p>Crab rangoon is the control variable. It gets tasted first, every time.</p></div>
+      <div class="rule"><span class="rn mono">04</span><p>Stars are earned, not given — most buffets don't get one.</p></div>
+      <div class="rule"><span class="rn mono">05</span><p>Win or lose, the verdict gets delivered live, plate in hand.</p></div>
+    </div>
+  </section>
+
+  <section id="scoreboard" class="wrap">
+    <div class="section-head">
+      <h2>Follow the route</h2>
+      <span class="section-tag">sample layout — real log goes here</span>
+    </div>
+    <p class="route-note">Pinned by state for now, since exact stop addresses aren't public yet. Tap a state to filter the log below — hand us his real stop list and this becomes a real interactive map with exact addresses, so viewers can go eat where he ate.</p>
+    <div class="route-layout">
+      <div class="route-map">
+        <svg class="road-svg" viewBox="0 0 240 420" role="img" aria-label="Stylized route map: Ohio, Indiana, and Tennessee buffet stops">
+          <path class="road" d="M70,40 C 150,80 40,170 130,210 C 190,235 210,300 150,340" />
+          <path class="road tail" d="M150,340 C 120,365 190,385 205,400" />
+
+          <g class="pin" data-state="OH" tabindex="0" role="button" aria-label="Ohio — 3 logged stops. Tap to filter the log." transform="translate(70,40)">
+            <g class="pin-visual">
+              <use href="#pin-marker" x="-13" y="-33" width="26" height="35"></use>
+              <text class="pin-label" x="0" y="16" text-anchor="middle">OHIO</text>
+              <text class="pin-sub" x="0" y="28" text-anchor="middle">3 stops</text>
+            </g>
+          </g>
+
+          <g class="pin" data-state="IN" tabindex="0" role="button" aria-label="Indiana — 1 logged stop. Tap to filter the log." transform="translate(130,210)">
+            <g class="pin-visual">
+              <use href="#pin-marker" x="-13" y="-33" width="26" height="35"></use>
+              <text class="pin-label" x="0" y="16" text-anchor="middle">INDIANA</text>
+              <text class="pin-sub" x="0" y="28" text-anchor="middle">1 stop</text>
+            </g>
+          </g>
+
+          <g class="pin hero-pin" data-state="TN" tabindex="0" role="button" aria-label="Tennessee — the first-ever 5-star stop. Tap to filter the log." transform="translate(150,340)">
+            <g class="pin-visual">
+              <use href="#pin-marker" x="-14" y="-36" width="28" height="38"></use>
+              <text class="pin-label" x="0" y="17" text-anchor="middle">TENNESSEE</text>
+              <text class="pin-sub" x="0" y="29" text-anchor="middle">★ 5-star stop</text>
+            </g>
+          </g>
+
+          <text class="route-more" x="205" y="412" text-anchor="end">+ more soon</text>
+        </svg>
+        <div class="route-hint">tap OHIO · INDIANA · TENNESSEE</div>
+      </div>
+
+      <div class="route-log tourlog mono" id="route-log">
+        <div class="tourlog-row head">
+          <span>Stop</span><span>Location</span><span>Result</span>
+        </div>
+        <div class="tourlog-row" data-state="OH">
+          <span class="stop-no">041</span>
+          <span class="place">Ohio<small>Loaded sesame chicken, forgettable egg drop soup</small></span>
+          <span class="result"><span class="stars">★★★<span class="off">★★</span></span><span class="tag">example</span></span>
+        </div>
+        <div class="tourlog-row" data-state="OH">
+          <span class="stop-no">052</span>
+          <span class="place">Ohio<small>Cold sushi bar cost it two stars easy</small></span>
+          <span class="result"><span class="stars">★★<span class="off">★★★</span></span><span class="tag">example</span></span>
+        </div>
+        <div class="tourlog-row" data-state="IN">
+          <span class="stop-no">061</span>
+          <span class="place">Indiana<small>So close — rangoon carried the whole tray</small></span>
+          <span class="result"><span class="stars">★★★★<span class="off">★</span></span><span class="tag">example</span></span>
+        </div>
+        <div class="tourlog-row win" data-state="TN">
+          <span class="stop-no">087</span>
+          <span class="place">Tennessee — Grand Buffet<small>The one. First-ever perfect score</small></span>
+          <span class="result"><span class="stars">★★★★★</span><span class="tag">verified</span></span>
+        </div>
+        <div class="tourlog-row" data-state="OH">
+          <span class="stop-no">092</span>
+          <span class="place">Ohio<small>Solid Friday crowd, sauce was doing too much</small></span>
+          <span class="result"><span class="stars">★★★<span class="off">★★</span></span><span class="tag">example</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hall-of-fame" class="wrap">
+    <div class="section-head">
+      <h2>Hall of fame</h2>
+      <span class="section-tag">day 87</span>
+    </div>
+    <div class="fame">
+      <div class="medallion">5★</div>
+      <div>
+        <h3>Grand Buffet — Knoxville, TN</h3>
+        <p>Eighty-seven days and dozens of steam tables into the crawl, this is the buffet that finally broke the streak — the very first 5-star of the entire challenge.</p>
+        <div class="fine">Everything since has had to live up to it</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="merch" class="wrap">
+    <div class="section-head">
+      <h2>The takeout menu</h2>
+      <span class="section-tag">merch concept · coming soon</span>
+    </div>
+    <div class="menu-board">
+      <div class="shop-grid">
+        <div class="product">
+          <div class="art"><svg><use href="#tee-icon"></use></svg></div>
+          <div class="prow"><span class="pname">Mullet Rangoon Tee</span><span class="concept-pill">concept</span></div>
+          <p class="pdesc">Heavyweight cotton, control-variable graphic on the back</p>
+          <div class="prow"><span class="price">TBD</span></div>
+        </div>
+        <div class="product">
+          <div class="art"><svg><use href="#cap-icon"></use></svg></div>
+          <div class="prow"><span class="pname">Buffet or Bust Snapback</span><span class="concept-pill">concept</span></div>
+          <p class="pdesc">Structured cap, gold embroidery</p>
+          <div class="prow"><span class="price">TBD</span></div>
+        </div>
+        <div class="product">
+          <div class="art"><svg><use href="#pin-icon"></use></svg></div>
+          <div class="prow"><span class="pname">Steam Table Survivor Pin</span><span class="concept-pill">concept</span></div>
+          <p class="pdesc">Hard enamel, limited first run</p>
+          <div class="prow"><span class="price">TBD</span></div>
+        </div>
+        <div class="product">
+          <div class="art"><svg><use href="#sticker-icon"></use></svg></div>
+          <div class="prow"><span class="pname">"Still Standing" Stickers</span><span class="concept-pill">concept</span></div>
+          <p class="pdesc">Five stickers, one per star rating</p>
+          <div class="prow"><span class="price">TBD</span></div>
+        </div>
+      </div>
+      <div class="notify-row">
+        <input type="email" placeholder="you@email.com" aria-label="Email for merch drop" disabled>
+        <button class="btn primary" type="button" disabled>Notify me</button>
+      </div>
+      <p class="concept-note">Concept only — not a live store yet. Built to show what a Shopify drop could look like.</p>
+    </div>
+  </section>
+
+  <section id="follow" class="wrap" style="border-bottom:1px solid var(--line);">
+    <div class="section-head">
+      <h2>Follow the crawl</h2>
+    </div>
+    <div class="social-row">
+      <a href="https://www.tiktok.com/@mulletreview69" target="_blank" rel="noopener">TikTok · @mulletreview69</a>
+      <a href="https://www.instagram.com/mullet_review/" target="_blank" rel="noopener">Instagram · @mullet_review</a>
+      <a href="https://www.youtube.com/@mulletreview69" target="_blank" rel="noopener">YouTube · @mulletreview69</a>
+      <a href="https://www.facebook.com/p/Mullet-review-61560272919260/" target="_blank" rel="noopener">Facebook · Mullet review</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="foot-grid">
+    <div>
+      <h3 style="font-size:1.1rem;">This is a pitch, not a product.</h3>
+      <p class="credit" style="margin-top:10px;">This page is an unsolicited concept mockup — <strong>not</strong> Mullet Review's official site, and he hasn't seen or approved it. It was put together to show what a home base for the reviews (and eventually a Shopify merch drop) could look like, in the hope he'd want one built for real.</p>
+    </div>
+    <div class="credit">
+      Concept design &amp; build by <strong>Beacon865</strong> — helping small businesses and creators with little to no digital footprint get a real one.<br><br>
+      Want this built for real, your way? That's the pitch.
+    </div>
+  </div>
+  <div class="fineprint">unofficial fan-built concept · all buffet stats above are approximate and sourced from public posts/coverage · not affiliated with or endorsed by mullet review</div>
+</footer>
+
+<script>
+(function(){
+  try{
+    var pins = Array.prototype.slice.call(document.querySelectorAll('.route-map .pin'));
+    var rows = Array.prototype.slice.call(document.querySelectorAll('.route-log [data-state]'));
+    if(!pins.length || !rows.length) return;
+
+    function clearActive(){
+      pins.forEach(function(p){ p.classList.remove('active'); });
+      rows.forEach(function(r){ r.classList.remove('active'); r.classList.remove('dim'); });
+    }
+    function activate(state){
+      pins.forEach(function(p){
+        if(p.getAttribute('data-state') === state){ p.classList.add('active'); }
+      });
+      rows.forEach(function(r){
+        if(r.getAttribute('data-state') === state){ r.classList.add('active'); }
+        else{ r.classList.add('dim'); }
+      });
+      var firstRow = rows.filter(function(r){ return r.getAttribute('data-state') === state; })[0];
+      if(firstRow && firstRow.scrollIntoView){
+        firstRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+    function togglePin(p){
+      var state = p.getAttribute('data-state');
+      var wasActive = p.classList.contains('active');
+      clearActive();
+      if(!wasActive){ activate(state); }
+    }
+    pins.forEach(function(p){
+      p.addEventListener('click', function(){ togglePin(p); });
+      p.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          togglePin(p);
+        }
+      });
+    });
+  }catch(e){}
+})();
+</script>
+
+</body>
+</html>
