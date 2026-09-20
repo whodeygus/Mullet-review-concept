@@ -648,7 +648,7 @@
   <section class="hero wrap" style="border-top:none;">
     <svg class="hero-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#mullet-icon"></use></svg>
     <div class="hero-inner">
-      <div class="eyebrow"><span class="dot"></span> Ohio · Tennessee · Indiana buffet crawl</div>
+      <div class="eyebrow"><span class="dot"></span> Ohio · Indiana · Tennessee · North Carolina buffet crawl</div>
       <div class="neon">MULLET REVIEW</div>
       <h1>One mullet. Every buffet. <em>Zero surrender.</em></h1>
       <p class="lede">A mail carrier by day, a one-man steam-table gauntlet by night. The mission: eat at Chinese and Asian buffets until he lands a 5-star review — or the buffet finally wins. Ninety-something episodes in, it still hasn't happened twice.</p>
@@ -660,7 +660,7 @@
         <div class="stat"><div class="num">900K+</div><div class="label">TikTok followers</div></div>
         <div class="stat"><div class="num">75+</div><div class="label">Buffets reviewed</div></div>
         <div class="stat"><div class="num">87</div><div class="label">Days to first 5★</div></div>
-        <div class="stat"><div class="num">OH·TN·IN</div><div class="label">States crawled</div></div>
+        <div class="stat"><div class="num">OH·IN·TN·NC</div><div class="label">States crawled</div></div>
       </div>
     </div>
   </section>
@@ -687,9 +687,10 @@
     <p class="route-note">Pinned by state for now, since exact stop addresses aren't public yet. Tap a state to filter the log below — hand us his real stop list and this becomes a real interactive map with exact addresses, so viewers can go eat where he ate.</p>
     <div class="route-layout">
       <div class="route-map">
-        <svg class="road-svg" viewBox="0 0 240 420" role="img" aria-label="Stylized route map: Ohio, Indiana, and Tennessee buffet stops">
+        <svg class="road-svg" viewBox="0 0 240 500" role="img" aria-label="Stylized route map: Ohio, Indiana, Tennessee, and North Carolina buffet stops">
           <path class="road" d="M70,40 C 150,80 40,170 130,210 C 190,235 210,300 150,340" />
-          <path class="road tail" d="M150,340 C 120,365 190,385 205,400" />
+          <path class="road" d="M150,340 C 110,362 170,395 125,430" />
+          <path class="road tail" d="M125,430 C 95,450 175,455 195,470" />
 
           <g class="pin" data-state="OH" tabindex="0" role="button" aria-label="Ohio — 3 logged stops. Tap to filter the log." transform="translate(70,40)">
             <g class="pin-visual">
@@ -715,9 +716,17 @@
             </g>
           </g>
 
-          <text class="route-more" x="205" y="412" text-anchor="end">+ more soon</text>
+          <g class="pin" data-state="NC" tabindex="0" role="button" aria-label="North Carolina — 1 logged stop. Tap to filter the log." transform="translate(125,430)">
+            <g class="pin-visual">
+              <use href="#pin-marker" x="-13" y="-33" width="26" height="35"></use>
+              <text class="pin-label" x="0" y="16" text-anchor="middle">NORTH CAROLINA</text>
+              <text class="pin-sub" x="0" y="28" text-anchor="middle">1 stop</text>
+            </g>
+          </g>
+
+          <text class="route-more" x="215" y="482" text-anchor="end">+ more soon</text>
         </svg>
-        <div class="route-hint">tap OHIO · INDIANA · TENNESSEE</div>
+        <div class="route-hint">tap OHIO · INDIANA · TENNESSEE · NORTH CAROLINA</div>
       </div>
 
       <div class="route-log tourlog mono" id="route-log">
@@ -738,6 +747,11 @@
           <span class="stop-no">061</span>
           <span class="place">Indiana<small>So close — rangoon carried the whole tray</small></span>
           <span class="result"><span class="stars">★★★★<span class="off">★</span></span><span class="tag">example</span></span>
+        </div>
+        <div class="tourlog-row" data-state="NC">
+          <span class="stop-no">078</span>
+          <span class="place">North Carolina<small>Hush puppies on the side threw everyone off</small></span>
+          <span class="result"><span class="stars">★★★<span class="off">★★</span></span><span class="tag">example</span></span>
         </div>
         <div class="tourlog-row win" data-state="TN">
           <span class="stop-no">087</span>
